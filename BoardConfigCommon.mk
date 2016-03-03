@@ -98,12 +98,13 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/s3c-usbgadget/gadget/l
 # Recovery
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_HAS_NO_SELECT_BUTTON := true
-BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/aries-common/recovery/graphics.c
+#BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/aries-common/recovery/graphics.c
 BOARD_USES_BML_OVER_MTD := true
 BOARD_CUSTOM_BOOTIMG_MK := device/samsung/aries-common/shbootimg.mk
 TARGET_RECOVERY_FSTAB := device/samsung/aries-common/fstab.aries
 RECOVERY_FSTAB_VERSION := 2
 TARGET_NO_SEPARATE_RECOVERY := true
+TARGET_RECOVERY_DEVICE_DIRS := device/samsung/aries-common
 
 # Boot Animation
 TARGET_BOOTANIMATION_PRELOAD := true
@@ -161,3 +162,28 @@ BOARD_HARDWARE_CLASS := device/samsung/aries-common/cmhw/
 
 # Include aries specific stuff
 -include device/samsung/aries-common/Android.mk
+
+# TWRP Configuration
+# Recovery UI Size
+TW_THEME := portrait_mdpi
+DEVICE_RESOLUTION := 480x800
+# Fix Brightness Controls
+TW_BRIGHTNESS_PATH := "/sys/class/backlight/s5p_bl/brightness"
+TW_MAX_BRIGHTNESS := 255
+# Storage Configuration
+BOARD_HAS_NO_REAL_SDCARD := true
+TW_INTERNAL_STORAGE_PATH := "/sdcard"
+TW_INTERNAL_STORAGE_MOUNT_POINT := "sdcard"
+TW_EXTERNAL_STORAGE_PATH := "/external_sd"
+TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
+# Download Mode Compatibility
+TW_HAS_DOWNLOAD_MODE := true
+TW_NO_REBOOT_BOOTLOADER := true
+# Include Cryptographic Functionality
+TW_INCLUDE_CRYPTO := true
+# Fix MTP in Windows -- goes with new init.recovery.usb.rc
+TW_EXCLUDE_DEFAULT_USB_INIT := true
+# Allow Screenshot Functionality
+TW_INCLUDE_FB2PNG := true
+# Don't Include SuperSU -- saves space
+TW_EXCLUDE_SUPERSU := true
